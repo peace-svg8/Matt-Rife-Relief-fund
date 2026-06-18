@@ -1,0 +1,122 @@
+/* =================== */
+/* NAVBAR               */
+/* =================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 1rem 0;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.navbar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  letter-spacing: -0.5px;
+}
+
+.logo span {
+  color: var(--pink);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-links a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-body);
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-links a:hover {
+  color: var(--pink);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--pink);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-donate-btn {
+  background: var(--pink);
+  color: #fff !important;
+  padding: 0.6rem 1.5rem;
+  border-radius: var(--radius-full);
+  font-weight: 600 !important;
+  box-shadow: var(--shadow-pink);
+  transition: all 0.3s ease !important;
+}
+
+.nav-donate-btn::after {
+  display: none !important;
+}
+
+.nav-donate-btn:hover {
+  background: var(--pink-dark) !important;
+  color: #fff !important;
+  transform: translateY(-2px);
+}
+
+/* Mobile menu */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-dark);
+}
+
+@media (max-width: 900px) {
+  .menu-toggle {
+    display: block;
+  }
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: #fff;
+    flex-direction: column;
+    padding: 5rem 2rem 2rem;
+    gap: 1.5rem;
+    box-shadow: var(--shadow-lg);
+    transition: right 0.3s ease;
+    z-index: 1001;
+  }
+  .nav-links.open {
+    right: 0;
+  }
+  .nav-links a::after {
+    display: none;
+  }
+}

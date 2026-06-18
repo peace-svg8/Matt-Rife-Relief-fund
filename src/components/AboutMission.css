@@ -1,0 +1,97 @@
+/* =================== */
+/* ABOUT MISSION        */
+/* =================== */
+.about-section {
+  background: var(--bg-light);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.about-text {
+  color: var(--text-body);
+  margin-bottom: 1.5rem;
+  font-size: 1.05rem;
+}
+
+.about-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+
+.about-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  padding: 1rem;
+  background: #fff;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.about-feature:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.feature-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.about-feature h4 {
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+}
+
+.about-feature p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* Image stack */
+.about-image-stack {
+  position: relative;
+  padding: 2rem;
+}
+
+.about-img-main {
+  width: 85%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+}
+
+.about-img-overlay {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 55%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 4px solid #fff;
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+}
+
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .about-features {
+    grid-template-columns: 1fr;
+  }
+  .about-image-stack {
+    padding: 1rem;
+  }
+}

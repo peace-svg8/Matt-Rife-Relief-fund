@@ -1,0 +1,106 @@
+/* =================== */
+/* CAMPAIGNS            */
+/* =================== */
+.campaigns-section {
+  background: var(--bg-white);
+}
+
+.campaigns-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.campaign-card {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.campaign-img-wrap {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.campaign-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.campaign-card:hover .campaign-img-wrap img {
+  transform: scale(1.05);
+}
+
+.campaign-tag {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: var(--pink);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius-full);
+}
+
+.campaign-body {
+  padding: 1.5rem;
+}
+
+.campaign-body h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
+}
+
+.campaign-body > p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 1.2rem;
+  line-height: 1.5;
+}
+
+.campaign-progress {
+  margin-bottom: 1.2rem;
+}
+
+.campaign-progress-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+}
+
+.campaign-progress-info strong {
+  color: var(--pink);
+}
+
+.campaign-goal {
+  color: var(--text-muted);
+}
+
+.campaign-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid var(--bg-soft);
+}
+
+.campaign-donors {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.campaign-footer .btn {
+  padding: 0.5rem 1.2rem;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 900px) {
+  .campaigns-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}

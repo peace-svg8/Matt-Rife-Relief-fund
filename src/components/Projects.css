@@ -1,0 +1,82 @@
+/* =================== */
+/* PROJECTS             */
+/* =================== */
+.projects-section {
+  background: var(--bg-light);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.project-card {
+  padding: 2rem;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.project-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.project-status {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.25rem 0.7rem;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.8rem;
+}
+
+.project-status.active { background: #E8F5E9; color: #2E7D32; }
+.project-status.ongoing { background: #FFF3E0; color: #E65100; }
+.project-status.planned { background: #E3F2FD; color: #1565C0; }
+
+.project-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+}
+
+.project-location {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.8rem;
+}
+
+.project-desc {
+  font-size: 0.9rem;
+  color: var(--text-body);
+  margin-bottom: 1.2rem;
+  line-height: 1.6;
+}
+
+.project-link {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--pink);
+  transition: gap 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.project-link:hover {
+  gap: 0.6rem;
+}
+
+@media (max-width: 900px) {
+  .projects-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
