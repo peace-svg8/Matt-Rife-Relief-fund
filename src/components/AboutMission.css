@@ -95,3 +95,21 @@
     padding: 1rem;
   }
 }
+
+@media (max-width: 480px) {
+  .about-img-main {
+    width: 100%;
+  }
+  .about-img-overlay {
+    width: 50%;
+    bottom: -0.5rem;
+    right: -0.5rem;
+  }
+  .about-image-stack {
+    padding: 0.5rem;
+  }
+  .about-feature {
+    padding: 0.8rem;
+  }
+}
+

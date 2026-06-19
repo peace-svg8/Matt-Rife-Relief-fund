@@ -1,26 +1,45 @@
 import React, { useState } from 'react';
-import { Heart, Backpack } from 'lucide-react';
+import { Heart, Backpack, Users, Globe2, Sparkles } from 'lucide-react';
 import './Hero.css';
 
 const Hero = () => {
   return (
     <section id="home" className="hero">
+      <div className="hero-bg-shapes">
+        <div className="hero-bg-image"></div>
+        <div className="shape shape-1"></div>
+        <div className="shape shape-2"></div>
+      </div>
+
       <div className="container hero-grid">
+        {/* Left Side: Text Content */}
         <div className="hero-text">
-          <div className="section-badge light-badge"><Heart size={14} fill="currentColor" /> Matt Rife Relief Fund</div>
-          <h1 className="hero-classic-title">
-            Fund<br />
-            <span className="text-pink">for</span><br />
-            Others
-          </h1>
-          <p className="hero-desc">
-            Providing humanitarian assistance, education, shelter, healthcare, and emotional support to orphaned children and families affected by conflict worldwide.
-          </p>
-          <div className="hero-btns">
-            <a href="#donate" className="btn btn-pink btn-lg">Donate Now →</a>
-            <a href="#mission" className="btn btn-outline-pink btn-lg">Our Mission</a>
+          <div className="section-badge light-badge slide-in">
+            <Heart size={14} fill="var(--pink)" color="var(--pink)" />
+            Matt Rife Relief Fund
           </div>
-          <div className="hero-stats-mini">
+
+          <h1 className="hero-title slide-in-delay-1">
+            Hope <br />
+            <span className="text-pink flex-inline items-center gap-2">
+              Starts Here <Sparkles size={40} />
+            </span>
+          </h1>
+
+          <p className="hero-desc slide-in-delay-2">
+            We are dedicated to providing humanitarian assistance, education, and shelter to children and families affected by conflict worldwide. Every contribution builds a better tomorrow.
+          </p>
+
+          <div className="hero-btns slide-in-delay-3">
+            <a href="#donate" className="btn btn-pink btn-lg hero-btn-main">
+              Donate Now →
+            </a>
+            <a href="#mission" className="btn btn-outline-pink btn-lg">
+              Our Mission
+            </a>
+          </div>
+
+          <div className="hero-stats-row slide-in-delay-4">
             <div className="hero-stat">
               <strong>120K+</strong>
               <span>People Reached</span>
@@ -37,15 +56,33 @@ const Hero = () => {
             </div>
           </div>
         </div>
-        <div className="hero-image-wrap">
-          <div className="hero-image-frame">
-            <img src="/hero-child.png" alt="Child we are helping" className="hero-img" />
-          </div>
-          <div className="hero-float-card">
-            <span className="float-icon"><Backpack size={20} color="var(--pink)" /></span>
-            <div>
-              <strong>5,000+</strong>
-              <span>Children in School</span>
+
+        {/* Right Side: Image Mosaic */}
+        <div className="hero-visual">
+          <div className="mosaic-grid">
+            {/* Main large image */}
+            <div className="mosaic-item mosaic-item-large pop-in">
+              <img src="/hero-child.png" alt="Child we are helping" />
+              <div className="mosaic-overlay"></div>
+            </div>
+
+            {/* Top right smaller image */}
+            <div className="mosaic-item mosaic-item-small pop-in-delay-1">
+              <img src="/campaign-food.png" alt="Providing food" />
+            </div>
+
+            {/* Bottom right smaller image */}
+            <div className="mosaic-item mosaic-item-medium pop-in-delay-2">
+              <img src="/campaign-education.png" alt="Education initiatives" />
+              <div className="hero-float-card float-anim">
+                <span className="float-icon-bg">
+                  <Backpack size={18} color="var(--pink)" />
+                </span>
+                <div className="float-card-text">
+                  <strong>5,000+</strong>
+                  <span>In School</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
