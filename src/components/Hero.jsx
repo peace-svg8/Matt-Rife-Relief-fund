@@ -62,18 +62,18 @@ const Hero = () => {
           <div className="mosaic-grid">
             {/* Main large image */}
             <div className="mosaic-item mosaic-item-large pop-in">
-              <img src="/hero-child.png" alt="Child we are helping" />
+              <img src="/hero-child.webp" alt="Child we are helping" />
               <div className="mosaic-overlay"></div>
             </div>
 
             {/* Top right smaller image */}
             <div className="mosaic-item mosaic-item-small pop-in-delay-1">
-              <img src="/campaign-food.png" alt="Providing food" />
+              <img src="/campaign-food.webp" alt="Providing food" />
             </div>
 
             {/* Bottom right smaller image */}
             <div className="mosaic-item mosaic-item-medium pop-in-delay-2">
-              <img src="/campaign-education.png" alt="Education initiatives" />
+              <img src="/campaign-education.webp" alt="Education initiatives" />
               <div className="hero-float-card float-anim">
                 <span className="float-icon-bg">
                   <Backpack size={18} color="var(--pink)" />
