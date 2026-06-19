@@ -4,7 +4,7 @@ import './Campaigns.css';
 
 const campaigns = [
   {
-    image: '/campaign-education.jpg',
+    image: '/campaign-education.webp',
     title: 'Help Children Access Education',
     description: 'School supplies and educational support for children in war-affected regions.',
     raised: 12500,
@@ -12,7 +12,7 @@ const campaigns = [
     donors: 184,
   },
   {
-    image: '/campaign-food.png',
+    image: '/campaign-food.webp',
     title: 'Food & Nutrition for Families',
     description: 'Food and nutrition assistance for vulnerable families displaced by conflict.',
     raised: 18000,
@@ -20,7 +20,7 @@ const campaigns = [
     donors: 256,
   },
   {
-    image: '/campaign-shelter.png',
+    image: '/campaign-shelter.webp',
     title: 'Emergency Shelter & Relief',
     description: 'Providing emergency shelter and relief materials to displaced communities.',
     raised: 9800,
@@ -45,7 +45,7 @@ const Campaigns = () => {
             return (
               <div key={i} className="card campaign-card">
                 <div className="campaign-img-wrap">
-                  <img src={c.image} alt={c.title} />
+                  <img src={c.image} alt={c.title} loading="lazy" />
                   <div className="campaign-tag">Active</div>
                 </div>
                 <div className="campaign-body">
