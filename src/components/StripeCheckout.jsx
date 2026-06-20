@@ -18,15 +18,21 @@ const CheckoutForm = ({ amount, onBack }) => {
     setIsProcessing(true);
     setErrorMessage(null);
 
-    const { error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: window.location.origin + '/?payment_status=success',
-      },
-    });
+    try {
+      const { error } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: window.location.origin + '/?payment_status=success',
+        },
+      });
 
-    if (error) {
-      setErrorMessage(error.message);
+      if (error) {
+        setErrorMessage(error.message);
+        setIsProcessing(false);
+      }
+    } catch (err) {
+      console.error("Stripe confirm error:", err);
+      setErrorMessage(err.message || 'An unexpected error occurred during payment.');
       setIsProcessing(false);
     }
   };
