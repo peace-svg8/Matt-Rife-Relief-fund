@@ -49,10 +49,10 @@ const AboutMission = () => {
             </div>
           </div>
 
-          <div className="about-right">
+          <div className="about-right reveal-on-scroll reveal-delay-2">
             <div className="about-image-stack">
               <img src="/happy-children.webp" alt="Happy children reaching out with joy" className="about-img-main" loading="lazy" />
-              <img src="/relief-work-new.webp" alt="Volunteers doing relief work" className="about-img-overlay" loading="lazy" />
+              <img src="/relief-work-new.webp" alt="Volunteers doing relief work" className="about-img-overlay reveal-on-scroll reveal-delay-3" loading="lazy" />
             </div>
           </div>
         </div>

@@ -43,7 +43,7 @@ const Campaigns = () => {
           {campaigns.map((c, i) => {
             const pct = Math.round((c.raised / c.goal) * 100);
             return (
-              <div key={i} className="card campaign-card">
+              <div key={i} className={`card campaign-card reveal-on-scroll reveal-delay-${(i % 3) + 1}`}>
                 <div className="campaign-img-wrap">
                   <img src={c.image} alt={c.title} loading="lazy" />
                   <div className="campaign-tag">Active</div>

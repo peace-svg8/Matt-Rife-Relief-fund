@@ -8,7 +8,7 @@ const FounderSpotlight = () => {
       <div className="container">
         <div className="founder-grid">
           {/* Portrait Side */}
-          <div className="founder-image-wrap">
+          <div className="founder-image-wrap reveal-on-scroll">
             <div className="founder-image-frame">
               <img
                 src="/matt-portrait.webp"
