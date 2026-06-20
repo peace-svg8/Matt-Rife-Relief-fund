@@ -10,10 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@paypal/checkout-server-sdk": "^1.0.3",
+    "@paypal/react-paypal-js": "^10.0.0",
+    "@stripe/react-stripe-js": "^6.6.0",
+    "@stripe/stripe-js": "^9.8.0",
+    "firebase-admin": "^14.0.0",
     "lucide-react": "^1.21.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "sharp": "^0.35.1"
+    "sharp": "^0.35.1",
+    "stripe": "^22.2.2"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

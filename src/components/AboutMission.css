@@ -88,9 +88,11 @@
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+
   .about-features {
     grid-template-columns: 1fr;
   }
+
   .about-image-stack {
     padding: 1rem;
   }
@@ -100,16 +102,18 @@
   .about-img-main {
     width: 100%;
   }
+
   .about-img-overlay {
     width: 50%;
     bottom: -0.5rem;
     right: -0.5rem;
   }
+
   .about-image-stack {
     padding: 0.5rem;
   }
+
   .about-feature {
     padding: 0.8rem;
   }
 }
-

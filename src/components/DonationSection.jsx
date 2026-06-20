@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { BookOpen, Utensils, Home, HeartPulse, Construction, Globe2, Gift, PartyPopper, Heart, CheckCircle2, CreditCard } from 'lucide-react';
+import { BookOpen, Utensils, Home, HeartPulse, Construction, Globe2, PartyPopper, Heart, CheckCircle2, CreditCard, Smartphone, X } from 'lucide-react';
+import StripeCheckout from './StripeCheckout';
+import PayPalCheckout from './PayPalCheckout';
 import './Donation.css';
 
 const donationTiers = [
@@ -14,6 +16,16 @@ const donationTiers = [
 const DonationSection = () => {
   const [selectedTier, setSelectedTier] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState(null);
+  const [fundedProject, setFundedProject] = useState(null);
+  const [checkoutMode, setCheckoutMode] = useState(false);
+
+  React.useEffect(() => {
+    const handleFund = (e) => {
+      setFundedProject(e.detail);
+    };
+    window.addEventListener('fundProject', handleFund);
+    return () => window.removeEventListener('fundProject', handleFund);
+  }, []);
 
   const goal = 500000;
   const raised = 325000;
@@ -28,6 +40,18 @@ const DonationSection = () => {
           <p className="section-subtitle">Each amount directly funds a specific area of impact. Choose how you'd like to help.</p>
         </div>
 
+        {fundedProject && (
+          <div className="funded-project-banner" style={{ background: 'rgba(233, 30, 99, 0.1)', padding: '1rem', borderRadius: '8px', marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div>
+              <strong style={{ color: 'var(--pink)', display: 'block', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Directly Funding:</strong>
+              <span style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>{fundedProject.title}</span>
+            </div>
+            <button onClick={() => setFundedProject(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)' }}>
+              <X size={20} />
+            </button>
+          </div>
+        )}
+
         {/* Progress */}
         <div className="donate-progress-wrap">
           <div className="donate-progress-stats">
@@ -40,63 +64,92 @@ const DonationSection = () => {
           <p className="donate-donors-text"><PartyPopper size={18} style={{ display: 'inline', marginRight: '6px', verticalAlign: 'text-bottom' }} color="var(--pink)" /> Join <strong>2,450+</strong> generous donors who have already contributed</p>
         </div>
 
-        {/* Tiers */}
-        <div className="tiers-grid">
-          {donationTiers.map((tier, i) => (
-            <div
-              key={i}
-              className={`tier-card ${selectedTier === i ? 'selected' : ''}`}
-              onClick={() => setSelectedTier(i)}
-            >
-              <div className="tier-icon">{tier.icon}</div>
-              <h3 className="tier-amount">${tier.amount.toLocaleString()}</h3>
-              <p className="tier-impact">{tier.impact}</p>
-              <div className="tier-check">{selectedTier === i ? <CheckCircle2 size={24} /> : ''}</div>
+        {!checkoutMode ? (
+          <>
+            {/* Tiers */}
+            <div className="tiers-grid">
+              {donationTiers.map((tier, i) => (
+                <div
+                  key={i}
+                  className={`tier-card ${selectedTier === i ? 'selected' : ''}`}
+                  onClick={() => setSelectedTier(i)}
+                >
+                  <div className="tier-icon">{tier.icon}</div>
+                  <h3 className="tier-amount">${tier.amount.toLocaleString()}</h3>
+                  <p className="tier-impact">{tier.impact}</p>
+                  <div className="tier-check">{selectedTier === i ? <CheckCircle2 size={24} /> : ''}</div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
 
-        {/* Payment methods */}
-        <div className="payment-section-wrap">
-          <h3 className="payment-title">Choose Payment Method</h3>
-          <div className="payment-options">
-            <div
-              className={`payment-option ${paymentMethod === 'paypal' ? 'active' : ''}`}
-              onClick={() => setPaymentMethod('paypal')}
-            >
-              <span className="pay-logo paypal-logo">Pay<span>Pal</span></span>
+            {/* Payment methods */}
+            <div className="payment-section-wrap">
+              <h3 className="payment-title">Choose Payment Method</h3>
+              <div className="payment-options">
+                <div
+                  className={`payment-option ${paymentMethod === 'paypal' ? 'active' : ''}`}
+                  onClick={() => setPaymentMethod('paypal')}
+                >
+                  <span className="pay-logo paypal-logo">Pay<span>Pal</span></span>
+                </div>
+                <div
+                  className={`payment-option ${paymentMethod === 'cashapp' ? 'active' : ''}`}
+                  onClick={() => setPaymentMethod('cashapp')}
+                >
+                  <span className="pay-logo cashapp-logo"><span>$</span> Cash App</span>
+                </div>
+                <div
+                  className={`payment-option ${paymentMethod === 'wallet' ? 'active' : ''}`}
+                  onClick={() => setPaymentMethod('wallet')}
+                >
+                  <span className="pay-logo giftcard-logo"><Smartphone size={20} style={{ display: 'inline', marginRight: '6px', verticalAlign: 'text-bottom' }} /> Apple / Google Pay</span>
+                </div>
+                <div
+                  className={`payment-option ${paymentMethod === 'card' ? 'active' : ''}`}
+                  onClick={() => setPaymentMethod('card')}
+                >
+                  <span className="pay-logo card-logo"><CreditCard size={20} style={{ display: 'inline', marginRight: '6px', verticalAlign: 'text-bottom' }} /> Visa / Mastercard</span>
+                </div>
+              </div>
             </div>
-            <div
-              className={`payment-option ${paymentMethod === 'cashapp' ? 'active' : ''}`}
-              onClick={() => setPaymentMethod('cashapp')}
-            >
-              <span className="pay-logo cashapp-logo"><span>$</span> Cash App</span>
+
+            <div className="text-center">
+              <button
+                className="btn btn-pink btn-lg donate-final-btn"
+                disabled={selectedTier === null || paymentMethod === null}
+                onClick={() => setCheckoutMode(true)}
+              >
+                {selectedTier !== null && paymentMethod !== null
+                  ? `Donate $${donationTiers[selectedTier].amount.toLocaleString()} Now `
+                  : 'Select Amount & Payment Method'}
+              </button>
             </div>
-            <div
-              className={`payment-option ${paymentMethod === 'giftcard' ? 'active' : ''}`}
-              onClick={() => setPaymentMethod('giftcard')}
-            >
-              <span className="pay-logo giftcard-logo"><Gift size={20} style={{ display: 'inline', marginRight: '6px', verticalAlign: 'text-bottom' }} /> Gift Card</span>
-            </div>
-            <div
-              className={`payment-option ${paymentMethod === 'card' ? 'active' : ''}`}
-              onClick={() => setPaymentMethod('card')}
-            >
-              <span className="pay-logo card-logo"><CreditCard size={20} style={{ display: 'inline', marginRight: '6px', verticalAlign: 'text-bottom' }} /> Visa / Mastercard</span>
+          </>
+        ) : (
+          <div className="checkout-container" style={{ background: '#fff', padding: '3rem', borderRadius: '1rem', boxShadow: 'var(--shadow-lg)', maxWidth: '600px', margin: '0 auto', textAlign: 'center' }}>
+            <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Complete Your Donation</h3>
+            <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>
+              You are donating <strong>${donationTiers[selectedTier].amount.toLocaleString()}</strong> via <strong>{paymentMethod.toUpperCase()}</strong>.
+            </p>
+            
+            <div style={{ padding: '2rem', border: '2px dashed var(--pink-light)', borderRadius: '8px', marginBottom: '2rem', background: 'var(--bg-light)' }}>
+              {paymentMethod === 'paypal' ? (
+                <PayPalCheckout 
+                  amount={donationTiers[selectedTier].amount} 
+                  projectId={fundedProject ? fundedProject.title : 'general'} 
+                  onBack={() => setCheckoutMode(false)}
+                />
+              ) : (
+                <StripeCheckout 
+                  amount={donationTiers[selectedTier].amount} 
+                  projectId={fundedProject ? fundedProject.title : 'general'} 
+                  paymentMethodType={paymentMethod === 'wallet' ? 'link' : 'card'} 
+                  onBack={() => setCheckoutMode(false)}
+                />
+              )}
             </div>
           </div>
-        </div>
-
-        <div className="text-center">
-          <button
-            className="btn btn-pink btn-lg donate-final-btn"
-            disabled={selectedTier === null}
-          >
-            {selectedTier !== null
-              ? `Donate $${donationTiers[selectedTier].amount.toLocaleString()} Now `
-              : 'Select an Amount Above'}
-          </button>
-        </div>
+        )}
       </div>
     </section>
   );

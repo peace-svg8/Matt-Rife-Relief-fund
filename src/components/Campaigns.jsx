@@ -12,7 +12,7 @@ const campaigns = [
     donors: 184,
   },
   {
-    image: '/campaign-food.webp',
+    image: '/campaign-food.png',
     title: 'Food & Nutrition for Families',
     description: 'Food and nutrition assistance for vulnerable families displaced by conflict.',
     raised: 18000,

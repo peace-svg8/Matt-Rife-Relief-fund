@@ -29,7 +29,17 @@ const Projects = () => {
               <h3>{p.title}</h3>
               <p className="project-location"><MapPin size={14} style={{ display: 'inline', marginRight: '4px' }} /> {p.location}</p>
               <p className="project-desc">{p.desc}</p>
-              <a href="#donate" className="project-link">Learn More →</a>
+              <a 
+                href="#donate" 
+                className="project-link"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.dispatchEvent(new CustomEvent('fundProject', { detail: p }));
+                  document.getElementById('donate').scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                Fund this Project →
+              </a>
             </div>
           ))}
         </div>
