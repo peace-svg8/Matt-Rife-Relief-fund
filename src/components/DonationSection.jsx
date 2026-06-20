@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BookOpen, Utensils, Home, HeartPulse, Construction, Globe2, PartyPopper, Heart, CheckCircle2, CreditCard, Smartphone, X } from 'lucide-react';
-import StripeCheckout from './StripeCheckout';
+import FlutterwaveCheckout from './FlutterwaveCheckout';
 import PayPalCheckout from './PayPalCheckout';
 import './Donation.css';
 
@@ -93,12 +93,6 @@ const DonationSection = () => {
                   <span className="pay-logo paypal-logo">Pay<span>Pal</span></span>
                 </div>
                 <div
-                  className={`payment-option ${paymentMethod === 'cashapp' ? 'active' : ''}`}
-                  onClick={() => setPaymentMethod('cashapp')}
-                >
-                  <span className="pay-logo cashapp-logo"><span>$</span> Cash App</span>
-                </div>
-                <div
                   className={`payment-option ${paymentMethod === 'wallet' ? 'active' : ''}`}
                   onClick={() => setPaymentMethod('wallet')}
                 >
@@ -148,7 +142,7 @@ const DonationSection = () => {
                   onBack={() => setCheckoutMode(false)}
                 />
               ) : (
-                <StripeCheckout 
+                <FlutterwaveCheckout 
                   amount={donationTiers[selectedTier].amount} 
                   projectId={fundedProject ? fundedProject.title : 'general'} 
                   onBack={() => setCheckoutMode(false)}
