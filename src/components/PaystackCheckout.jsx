@@ -1,32 +1,33 @@
 import React, { useState } from 'react';
-import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
+import { usePaystackPayment } from 'react-paystack';
 
-const FlutterwaveCheckout = ({ amount, projectId, onBack }) => {
+const PaystackCheckout = ({ amount, projectId, onBack }) => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [error, setError] = useState(null);
 
   const config = {
-    public_key: import.meta.env.VITE_FLW_PUBLIC_KEY || 'FLWPUBK_TEST-dummy-key',
-    tx_ref: `tx-${Date.now()}-${Math.floor(Math.random() * 10000)}`,
-    amount: amount,
-    currency: 'USD', // Flutterwave supports processing USD cards directly!
-    payment_options: 'card,mobilemoney,ussd',
-    customer: {
-      email: email,
-      name: name,
-    },
-    meta: {
+    reference: `tx-${Date.now()}-${Math.floor(Math.random() * 10000)}`,
+    email: email,
+    amount: amount * 100, // Paystack amounts are in kobo/cents
+    publicKey: import.meta.env.VITE_PAYSTACK_PUBLIC_KEY || 'pk_test_dummy',
+    currency: 'USD',
+    metadata: {
+      name,
       projectId: projectId || 'general'
-    },
-    customizations: {
-      title: 'Relief Fund Donation',
-      description: `Donation for ${projectId || 'General Support'}`,
-      logo: 'https://matt-rife-relief-fund.vercel.app/logo.png', // Assuming we'll have a logo or it falls back
-    },
+    }
   };
 
-  const handleFlutterPayment = useFlutterwave(config);
+  const initializePayment = usePaystackPayment(config);
+
+  const onSuccess = (reference) => {
+    // Redirect to success URL to trigger the App.jsx success popup
+    window.location.href = window.location.origin + '/?payment_status=success';
+  };
+
+  const onClose = () => {
+    // Modal closed
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -35,21 +36,7 @@ const FlutterwaveCheckout = ({ amount, projectId, onBack }) => {
       return;
     }
     setError(null);
-
-    handleFlutterPayment({
-      callback: (response) => {
-        if (response.status === 'successful') {
-          // Redirect to success URL to trigger the App.jsx success popup
-          window.location.href = window.location.origin + '/?payment_status=success';
-        } else {
-          setError("Payment was not successful. Please try again.");
-        }
-        closePaymentModal();
-      },
-      onClose: () => {
-        // Modal closed without completing
-      },
-    });
+    initializePayment(onSuccess, onClose);
   };
 
   return (
@@ -95,4 +82,4 @@ const FlutterwaveCheckout = ({ amount, projectId, onBack }) => {
   );
 };
 
-export default FlutterwaveCheckout;
+export default PaystackCheckout;

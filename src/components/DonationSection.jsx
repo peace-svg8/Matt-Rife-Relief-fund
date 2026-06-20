@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BookOpen, Utensils, Home, HeartPulse, Construction, Globe2, PartyPopper, Heart, CheckCircle2, CreditCard, Smartphone, X } from 'lucide-react';
-import FlutterwaveCheckout from './FlutterwaveCheckout';
+import PaystackCheckout from './PaystackCheckout';
 import PayPalCheckout from './PayPalCheckout';
 import './Donation.css';
 
@@ -142,7 +142,7 @@ const DonationSection = () => {
                   onBack={() => setCheckoutMode(false)}
                 />
               ) : (
-                <FlutterwaveCheckout 
+                <PaystackCheckout 
                   amount={donationTiers[selectedTier].amount} 
                   projectId={fundedProject ? fundedProject.title : 'general'} 
                   onBack={() => setCheckoutMode(false)}
