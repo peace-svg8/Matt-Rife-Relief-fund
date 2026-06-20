@@ -151,7 +151,6 @@ const DonationSection = () => {
                 <StripeCheckout 
                   amount={donationTiers[selectedTier].amount} 
                   projectId={fundedProject ? fundedProject.title : 'general'} 
-                  paymentMethodType={paymentMethod === 'wallet' ? 'link' : 'card'} 
                   onBack={() => setCheckoutMode(false)}
                 />
               )}
