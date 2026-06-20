@@ -115,9 +115,17 @@ const DonationSection = () => {
 
             <div className="text-center">
               <button
+                type="button"
                 className="btn btn-pink btn-lg donate-final-btn"
                 disabled={selectedTier === null || paymentMethod === null}
-                onClick={() => setCheckoutMode(true)}
+                onClick={() => {
+                  setCheckoutMode(true);
+                  // On mobile, the UI changes size which can pull the footer up.
+                  // Smoothly scroll to the top of the donation section to prevent jumping to contact/footer!
+                  setTimeout(() => {
+                    document.getElementById('donate')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }, 50);
+                }}
               >
                 {selectedTier !== null && paymentMethod !== null
                   ? `Donate $${donationTiers[selectedTier].amount.toLocaleString()} Now `
