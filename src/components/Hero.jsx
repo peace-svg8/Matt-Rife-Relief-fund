@@ -68,7 +68,7 @@ const Hero = () => {
 
             {/* Top right smaller image */}
             <div className="mosaic-item mosaic-item-small pop-in-delay-1">
-              <img src="/campaign-food.png" alt="Providing food" />
+              <img src="/campaign-food.webp" alt="Providing food" />
             </div>
 
             {/* Bottom right smaller image */}

@@ -51,8 +51,8 @@ const AboutMission = () => {
 
           <div className="about-right">
             <div className="about-image-stack">
-              <img src="/happy-children.jpg" alt="Happy children reaching out with joy" className="about-img-main" loading="lazy" />
-              <img src="/relief-work-new.jpg" alt="Volunteers doing relief work" className="about-img-overlay" loading="lazy" />
+              <img src="/happy-children.webp" alt="Happy children reaching out with joy" className="about-img-main" loading="lazy" />
+              <img src="/relief-work-new.webp" alt="Volunteers doing relief work" className="about-img-overlay" loading="lazy" />
             </div>
           </div>
         </div>
