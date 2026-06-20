@@ -3,8 +3,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
 // Load Stripe with the publishable key. 
-// Hardcoding the key here so you don't have to restart your local development server!
-const stripePromise = loadStripe('pk_test_51Tk4NnIIR1gFFUQjrqfTuZm2j4JmaIgRCN7bVAfx9V35e2SUtVt5nSCpT4JrHowPMiTSY8iI3r1B7GEuw6CgtYjN00WZLz7AFk');
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || 'pk_test_51Tk4NnIIR1gFFUQjrqfTuZm2j4JmaIgRCN7bVAfx9V35e2SUtVt5nSCpT4JrHowPMiTSY8iI3r1B7GEuw6CgtYjN00WZLz7AFk');
 
 const CheckoutForm = ({ amount, onBack }) => {
   const stripe = useStripe();
