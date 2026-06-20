@@ -19,6 +19,14 @@ const CheckoutForm = ({ amount, onBack }) => {
     setErrorMessage(null);
 
     try {
+      // Required for Stripe React Elements before confirming
+      const { error: submitError } = await elements.submit();
+      if (submitError) {
+        setErrorMessage(submitError.message);
+        setIsProcessing(false);
+        return;
+      }
+
       const { error } = await stripe.confirmPayment({
         elements,
         confirmParams: {

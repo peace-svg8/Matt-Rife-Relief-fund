@@ -13,6 +13,14 @@ import Footer from './components/Footer';
 
 function App() {
   useEffect(() => {
+    // Check for successful payment return
+    const query = new URLSearchParams(window.location.search);
+    if (query.get('payment_status') === 'success') {
+      alert("Thank you so much! Your donation was successful.");
+      // Clear the URL so it doesn't keep showing
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
     const observerCallback = (entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
