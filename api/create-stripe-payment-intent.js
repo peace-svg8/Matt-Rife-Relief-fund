@@ -1,4 +1,5 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET);
+import Stripe from 'stripe';
+const stripe = new Stripe(process.env.STRIPE_SECRET);
 
 export default async function handler(req, res) {
   // Add CORS headers

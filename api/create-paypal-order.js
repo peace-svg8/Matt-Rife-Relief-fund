@@ -1,4 +1,4 @@
-const paypal = require('@paypal/checkout-server-sdk');
+import paypal from '@paypal/checkout-server-sdk';
 
 function environment() {
   let clientId = process.env.PAYPAL_CLIENT_ID || 'sb-dummy-client-id';

@@ -1,5 +1,6 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET);
-const admin = require('./_firebase');
+import Stripe from 'stripe';
+const stripe = new Stripe(process.env.STRIPE_SECRET);
+import admin from './_firebase.js';
 
 // Disable Vercel's default body parser so we can get the raw buffer for Stripe security verification
 export const config = {
