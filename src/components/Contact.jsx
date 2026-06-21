@@ -29,7 +29,7 @@ const Contact = () => {
                 <span className="contact-icon"><Mail size={24} color="var(--pink)" /></span>
                 <div>
                   <strong>Email</strong>
-                  <p>support@mattriferelieffund.org</p>
+                  <p><a href="mailto:mattriferelieffund@gmail.com" style={{ color: 'inherit', textDecoration: 'none' }} onMouseOver={(e) => e.target.style.textDecoration = 'underline'} onMouseOut={(e) => e.target.style.textDecoration = 'none'}>mattriferelieffund@gmail.com</a></p>
                 </div>
               </div>
               <div className="contact-item">

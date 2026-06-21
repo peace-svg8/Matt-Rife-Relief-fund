@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { BookOpen, Utensils, Home, HeartPulse, Construction, Globe2, PartyPopper, Heart, CheckCircle2, CreditCard, Smartphone, X } from 'lucide-react';
-import PaystackCheckout from './PaystackCheckout';
-import PayPalCheckout from './PayPalCheckout';
+
 import './Donation.css';
 
 const donationTiers = [
@@ -87,22 +86,16 @@ const DonationSection = () => {
               <h3 className="payment-title">Choose Payment Method</h3>
               <div className="payment-options">
                 <div
-                  className={`payment-option ${paymentMethod === 'paypal' ? 'active' : ''}`}
-                  onClick={() => setPaymentMethod('paypal')}
+                  className={`payment-option ${paymentMethod === 'cashapp' ? 'active' : ''}`}
+                  onClick={() => setPaymentMethod('cashapp')}
                 >
-                  <span className="pay-logo paypal-logo">Pay<span>Pal</span></span>
+                  <span className="pay-logo"><Smartphone size={20} style={{ display: 'inline', marginRight: '6px', verticalAlign: 'text-bottom' }} /> Cash App</span>
                 </div>
                 <div
-                  className={`payment-option ${paymentMethod === 'wallet' ? 'active' : ''}`}
-                  onClick={() => setPaymentMethod('wallet')}
+                  className={`payment-option ${paymentMethod === 'giftcard' ? 'active' : ''}`}
+                  onClick={() => setPaymentMethod('giftcard')}
                 >
-                  <span className="pay-logo giftcard-logo"><Smartphone size={20} style={{ display: 'inline', marginRight: '6px', verticalAlign: 'text-bottom' }} /> Apple / Google Pay</span>
-                </div>
-                <div
-                  className={`payment-option ${paymentMethod === 'card' ? 'active' : ''}`}
-                  onClick={() => setPaymentMethod('card')}
-                >
-                  <span className="pay-logo card-logo"><CreditCard size={20} style={{ display: 'inline', marginRight: '6px', verticalAlign: 'text-bottom' }} /> Visa / Mastercard</span>
+                  <span className="pay-logo"><CreditCard size={20} style={{ display: 'inline', marginRight: '6px', verticalAlign: 'text-bottom' }} /> Gift Card</span>
                 </div>
               </div>
             </div>
@@ -135,20 +128,47 @@ const DonationSection = () => {
             </p>
             
             <div style={{ padding: '2rem', border: '2px dashed var(--pink-light)', borderRadius: '8px', marginBottom: '2rem', background: 'var(--bg-light)' }}>
-              {paymentMethod === 'paypal' ? (
-                <PayPalCheckout 
-                  amount={donationTiers[selectedTier].amount} 
-                  projectId={fundedProject ? fundedProject.title : 'general'} 
-                  onBack={() => setCheckoutMode(false)}
-                />
+              {paymentMethod === 'cashapp' ? (
+                <div>
+                  <h4 style={{ marginBottom: '1rem', color: '#00D632' }}>Donate via Cash App</h4>
+                  <p style={{ marginBottom: '1.5rem', fontSize: '1.1rem' }}>
+                    Please send your donation of <strong>${donationTiers[selectedTier].amount.toLocaleString()}</strong> to our Cashtag:
+                  </p>
+                  <div style={{ background: '#fff', padding: '1rem', borderRadius: '8px', border: '1px solid #ddd', fontSize: '1.5rem', fontWeight: 'bold', display: 'inline-block', marginBottom: '1.5rem', color: '#333' }}>
+                    $OurCharityCashtag
+                  </div>
+                  <p style={{ color: 'var(--text-muted)' }}>
+                    Include "{fundedProject ? fundedProject.title : 'General Donation'}" in the note section!
+                  </p>
+                </div>
               ) : (
-                <PaystackCheckout 
-                  amount={donationTiers[selectedTier].amount} 
-                  projectId={fundedProject ? fundedProject.title : 'general'} 
-                  onBack={() => setCheckoutMode(false)}
-                />
+                <div>
+                  <h4 style={{ marginBottom: '1rem', color: 'var(--pink)' }}>Donate via Gift Card</h4>
+                  <p style={{ marginBottom: '1rem', fontSize: '1.1rem' }}>
+                    We accept unredeemed gift cards from major retailers (Amazon, Target, Walmart, etc.) to help fund our cause.
+                  </p>
+                  <div style={{ textAlign: 'left', background: '#fff', padding: '1.5rem', borderRadius: '8px', border: '1px solid #ddd', marginBottom: '1.5rem' }}>
+                    <strong>How to donate:</strong>
+                    <ol style={{ marginTop: '0.5rem', marginLeft: '1.5rem', lineHeight: '1.6' }}>
+                      <li>Ensure your gift card has a balance of at least ${donationTiers[selectedTier].amount.toLocaleString()}.</li>
+                      <li>Email the gift card details (brand, code, and PIN if applicable) to <strong><a href="mailto:mattriferelieffund@gmail.com" style={{ color: 'var(--pink)', textDecoration: 'underline' }}>mattriferelieffund@gmail.com</a></strong>.</li>
+                      <li>Mention "{fundedProject ? fundedProject.title : 'General Donation'}" in your email.</li>
+                    </ol>
+                  </div>
+                  <p style={{ color: 'var(--text-muted)' }}>
+                    Our team will verify the card and allocate the funds accordingly. Thank you!
+                  </p>
+                </div>
               )}
             </div>
+            
+            <button 
+              className="btn" 
+              style={{ background: 'transparent', color: 'var(--text-muted)', border: '1px solid #ddd', padding: '0.75rem 1.5rem', borderRadius: '50px' }}
+              onClick={() => setCheckoutMode(false)}
+            >
+              Back to Payment Options
+            </button>
           </div>
         )}
       </div>

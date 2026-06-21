@@ -165,8 +165,6 @@
   font-size: 1rem;
 }
 
-.paypal-logo { color: #003087; }
-.paypal-logo span { color: #0070BA; }
 .cashapp-logo span { color: #00D632; font-weight: 800; }
 .giftcard-logo { color: var(--text-dark); }
 

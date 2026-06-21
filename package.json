@@ -10,13 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@paypal/checkout-server-sdk": "^1.0.3",
-    "@paypal/react-paypal-js": "^10.0.0",
     "firebase-admin": "^14.0.0",
     "lucide-react": "^1.21.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "react-paystack": "^6.0.0",
     "sharp": "^0.35.1"
   },
   "devDependencies": {
