@@ -4,15 +4,43 @@ import './Contact.css';
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert('Thank you for reaching out! We will get back to you shortly.');
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/mattriferelieffund@gmail.com", {
+        method: "POST",
+        headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          _subject: `New Contact Form Message from ${formData.name}`
+        })
+      });
+      
+      if (response.ok) {
+        alert('Thank you for reaching out! We will get back to you shortly.');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        alert('Oops! There was a problem submitting your form. Please try again.');
+      }
+    } catch (error) {
+      alert('Oops! There was a problem submitting your form. Please try again.');
+    }
+    
+    setIsSubmitting(false);
   };
 
   return (
@@ -68,7 +96,9 @@ const Contact = () => {
               <label htmlFor="message">Message</label>
               <textarea id="message" name="message" rows="5" value={formData.message} onChange={handleChange} placeholder="Tell us more..." required></textarea>
             </div>
-            <button type="submit" className="btn btn-pink btn-lg" style={{ width: '100%' }}>Send Message →</button>
+            <button type="submit" className="btn btn-pink btn-lg" style={{ width: '100%' }} disabled={isSubmitting}>
+              {isSubmitting ? 'Sending...' : 'Send Message →'}
+            </button>
           </form>
         </div>
       </div>
